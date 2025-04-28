@@ -2,28 +2,133 @@
 <html>
 <head>
   <title>Gestion Livres</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
-    th { background-color: #f2f2f2; }
-    .btn-add { 
-      background: #28a745; 
-      color: white; 
-      padding: 8px 15px; 
-      margin-bottom: 15px; 
-      display: inline-block; 
-      text-decoration: none; 
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
     }
-    .btn-delete { color: red; border: none; background: none; cursor: pointer; }
-  </style>
-  <style>
-    .btn-edit {
-      color: #007bff;
+    
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      margin-bottom: 25px;
+      font-size: 2rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    th {
+      background-color: #3a506b;
+      color: white;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+    }
+    
+    tr:hover {
+      background-color: #f5f7fa;
+    }
+    
+    .btn-add {
+      display: inline-block;
+      background: #3a506b;
+      color: white;
+      padding: 12px 20px;
+      margin-bottom: 20px;
       text-decoration: none;
-      margin-right: 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s;
     }
+    
+    .btn-add:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-edit {
+      color: #5bc0be;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
     .btn-edit:hover {
-      text-decoration: underline;
+      background-color: rgba(91, 192, 190, 0.1);
+      text-decoration: none;
+    }
+    
+    .btn-delete {
+      color: #dc3545;
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .btn-delete:hover {
+      background-color: rgba(220, 53, 69, 0.1);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .availability {
+      font-weight: 500;
+    }
+    
+    .availability-high {
+      color: #28a745;
+    }
+    
+    .availability-low {
+      color: #ffc107;
+    }
+    
+    .availability-none {
+      color: #dc3545;
+    }
+    
+    form {
+      display: inline;
     }
   </style>
 </head>
@@ -32,7 +137,7 @@
 
   <div class="content">
     <h1>Gestion des Livres</h1>
-    <a href="/livres/add" class="btn-add">+ Ajouter Livre</a>
+    <a href="/livres/add" class="btn-add">+ Ajouter un Livre</a>
     
     <table>
       <thead>
@@ -40,7 +145,7 @@
           <th>ISBN</th>
           <th>Titre</th>
           <th>Auteur</th>
-          <th>Disponibles</th>
+          <th>Disponibilité</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -48,16 +153,24 @@
         <% livres.forEach(livre => { %>
           <tr>
             <td><%= livre.isbn %></td>
-            <td><%= livre.title %></td>
+            <td><strong><%= livre.title %></strong></td>
             <td><%= livre.author %></td>
-            <td><%= livre.available_quantity %>/<%= livre.total_quantity %></td>
             <td>
+              <span class="availability 
+                <%= livre.available_quantity === 0 ? 'availability-none' : 
+                    livre.available_quantity/livre.total_quantity < 0.2 ? 'availability-low' : 
+                    'availability-high' %>">
+                <%= livre.available_quantity %>/<%= livre.total_quantity %>
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
                 <a href="/livres/<%= livre._id %>/edit" class="btn-edit">Modifier</a>
-                <form action="/livres/<%= livre._id %>/delete" method="POST" style="display:inline;">
+                <form action="/livres/<%= livre._id %>/delete" method="POST">
                   <button type="submit" class="btn-delete">Supprimer</button>
                 </form>
-              </td>
-              
+              </div>
+            </td>
           </tr>
         <% }); %>
       </tbody>

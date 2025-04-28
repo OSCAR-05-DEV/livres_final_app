@@ -2,12 +2,96 @@
 <html>
 <head>
   <title>Nouvel Emprunt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    .form-container { max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; }
-    select, button { width: 100%; padding: 8px; }
-    .btn-submit { background: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .form-container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      font-weight: 500;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: #3a506b;
+      box-shadow: 0 0 0 3px rgba(58, 80, 107, 0.1);
+    }
+    
+    .btn-submit {
+      width: 100%;
+      background: #3a506b;
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-submit:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+    }
+    
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border: 1px solid #f5c6cb;
+    }
+    
+    option {
+      padding: 8px;
+    }
   </style>
 </head>
 <body>

@@ -2,12 +2,117 @@
 <html>
 <head>
   <title>Ajouter Livre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
-    .form-container { max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; }
-    input { width: 100%; padding: 8px; box-sizing: border-box; }
-    .btn-submit { background: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), 
+                      url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2rem;
+      position: relative;
+    }
+    
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #5bc0be;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #5bc0be;
+      box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.2);
+    }
+    
+    .btn-submit {
+      width: 100%;
+      background: #3a506b;
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn-submit:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    input:required {
+      border-left: 4px solid #5bc0be;
+    }
+    
+    /* Style pour le champ de quantité */
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+    
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -19,25 +124,25 @@
     <form action="/livres" method="POST" enctype="application/x-www-form-urlencoded">
       <div class="form-group">
         <label for="isbn">ISBN:</label>
-        <input type="text" id="isbn" name="isbn" required>
+        <input type="text" id="isbn" name="isbn" required placeholder="Exemple : 978-3-16-148410-0">
       </div>
       
       <div class="form-group">
         <label for="title">Titre:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" required placeholder="Titre du livre">
       </div>
       
       <div class="form-group">
         <label for="author">Auteur:</label>
-        <input type="text" id="author" name="author" required>
+        <input type="text" id="author" name="author" required placeholder="Nom de l'auteur">
       </div>
       
       <div class="form-group">
-        <label for="quantity">Quantité:</label>
+        <label for="quantity">Quantité disponible:</label>
         <input type="number" id="quantity" name="quantity" min="1" value="1" required>
       </div>
       
-      <button type="submit" class="btn-submit">Enregistrer</button>
+      <button type="submit" class="btn-submit">Enregistrer le livre</button>
     </form>
   </div>
 </body>

@@ -2,31 +2,122 @@
 <html>
 <head>
   <title>Gestion Étudiants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
-    th { background-color: #f2f2f2; }
-    .btn-delete { color: red; text-decoration: none; }
-    btn-add {
-    display: inline-block;
-    background: #28a745;
-    color: white;
-    padding: 8px 15px;
-    margin-bottom: 15px;
-    text-decoration: none;
-    border-radius: 4px;
-  }
-  .btn-add:hover {
-    background: #218838;
-  }
-  .btn-edit {
-    color: #007bff;
-    text-decoration: none;
-    margin-right: 10px;
-  }
-  .btn-edit:hover {
-    text-decoration: underline;
-  }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      font-weight: 500;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 20px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    th {
+      background-color: #3a506b;
+      color: white;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+    }
+    
+    tr:hover {
+      background-color: #f5f7fa;
+    }
+    
+    .btn-add {
+      display: inline-block;
+      background: #3a506b;
+      color: white;
+      padding: 12px 20px;
+      margin: 20px 0;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .btn-add:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-edit {
+      color: #5bc0be;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .btn-edit:hover {
+      background-color: rgba(91, 192, 190, 0.1);
+      text-decoration: none;
+    }
+    
+    .btn-delete {
+      color: #dc3545;
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .btn-delete:hover {
+      background-color: rgba(220, 53, 69, 0.1);
+    }
+    
+    .actions {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    form {
+      display: inline;
+    }
   </style>
 </head>
 <body>
@@ -53,19 +144,21 @@
             <td><%= etudiant.first_name %></td>
             <td><%= etudiant.email %></td>
             <td>
+              <div class="action-buttons">
                 <a href="/etudiants/<%= etudiant._id %>/edit" class="btn-edit">Modifier</a>
-                <form action="/etudiants/<%= etudiant._id %>/delete" method="POST" style="display:inline;">
+                <form action="/etudiants/<%= etudiant._id %>/delete" method="POST">
                   <button type="submit" class="btn-delete">Supprimer</button>
                 </form>
+              </div>
             </td>
           </tr>
         <% }); %>
       </tbody>
     </table>
-
   </div>
+  
   <div class="actions">
-    <a href="/etudiants/add" class="btn-add">+ Ajouter Étudiant</a>
+    <a href="/etudiants/add" class="btn-add">+ Ajouter un Étudiant</a>
   </div>
 </body>
 </html>

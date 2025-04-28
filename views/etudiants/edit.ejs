@@ -2,34 +2,114 @@
 <html>
 <head>
   <title>Modifier Étudiant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* Reuse the same styles as add.ejs */
-    .form-container {
-      max-width: 500px;
-      margin: 20px auto;
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
       padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
     }
+    
+    .form-container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      font-weight: 500;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
+    
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #495057;
     }
+    
     input[type="text"],
     input[type="email"] {
       width: 100%;
-      padding: 8px;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
       box-sizing: border-box;
     }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      outline: none;
+      border-color: #3a506b;
+      box-shadow: 0 0 0 3px rgba(58, 80, 107, 0.1);
+    }
+    
     .btn-submit {
-      background: #007bff;
+      width: 100%;
+      background: #3a506b;
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-submit:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Style pour les champs obligatoires */
+    input:required {
+      border-left: 3px solid #5bc0be;
+    }
+    
+    /* Style pour les champs facultatifs */
+    input:optional {
+      border-left: 3px solid #e0e0e0;
+    }
+    
+    /* Style spécifique pour la page de modification */
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .btn-cancel {
+      background: #f8f9fa;
+      color: #6c757d;
+      border: 1px solid #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .btn-cancel:hover {
+      background: #e9ecef;
+      color: #495057;
     }
   </style>
 </head>
@@ -37,35 +117,38 @@
   <%- include('../partials/menu') %>
 
   <div class="form-container">
-    <h1>Modifier Étudiant</h1>
+    <div class="form-header">
+      <h1>Modifier Étudiant</h1>
+      <a href="/etudiants" class="btn-cancel">Annuler</a>
+    </div>
     
     <form action="/etudiants/<%= etudiant._id %>?_method=PUT" method="POST">
       <div class="form-group">
         <label for="student_id">ID Étudiant:</label>
-        <input type="text" id="student_id" name="student_id" value="<%= etudiant.student_id %>" required>
+        <input type="text" id="student_id" name="student_id" value="<%= etudiant.student_id %>" required placeholder="ID étudiant">
       </div>
       
       <div class="form-group">
         <label for="first_name">Prénom:</label>
-        <input type="text" id="first_name" name="first_name" value="<%= etudiant.first_name %>" required>
+        <input type="text" id="first_name" name="first_name" value="<%= etudiant.first_name %>" required placeholder="Prénom de l'étudiant">
       </div>
       
       <div class="form-group">
         <label for="last_name">Nom:</label>
-        <input type="text" id="last_name" name="last_name" value="<%= etudiant.last_name %>" required>
+        <input type="text" id="last_name" name="last_name" value="<%= etudiant.last_name %>" required placeholder="Nom de l'étudiant">
       </div>
       
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<%= etudiant.email %>" required>
+        <input type="email" id="email" name="email" value="<%= etudiant.email %>" required placeholder="email@exemple.com">
       </div>
       
       <div class="form-group">
         <label for="phone">Téléphone:</label>
-        <input type="text" id="phone" name="phone" value="<%= etudiant.phone %>">
+        <input type="text" id="phone" name="phone" value="<%= etudiant.phone %>" placeholder="Numéro de téléphone">
       </div>
       
-      <button type="submit" class="btn-submit">Mettre à jour</button>
+      <button type="submit" class="btn-submit">Mettre à jour l'étudiant</button>
     </form>
   </div>
 </body>
